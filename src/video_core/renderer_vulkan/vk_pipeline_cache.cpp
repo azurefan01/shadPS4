@@ -383,8 +383,7 @@ bool PipelineCache::RefreshGraphicsKey() {
 
     // It seems that the number of samples > 1 set in the AA config doesn't mean we're always
     // rendering with MSAA, so we need to derive MS ratio from the CB settings.
-    ASSERT(key.num_samples >= num_samples);
-    ASSERT(num_samples == regs.depth_buffer.NumSamples());
+    num_samples = std::max(num_samples, regs.depth_buffer.NumSamples());
     key.num_samples = num_samples;
 
     return true;
